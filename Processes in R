@@ -1,0 +1,41 @@
+# Machine-Learning
+Nutritional properties of rice
+
+Process the data in R, then use Matlab to do the classification models. 
+
+
+##Clustering through WARDS###
+library(cluster)
+library(factoextra)
+library(NbClust)
+MBCR_cluster_add = read.csv("BCR_models_only.csv")
+MBCR_cluster_add.max = apply(na.exclude(MBCR_cluster_add[2:17]) , 2 , max) ##2 means column, 1 means row
+MBCR_cluster_add.min = apply(na.exclude(MBCR_cluster_add[2:17]), 2 , min)
+MBCR_cluster_add_scaled<- as.data.frame(scale(na.exclude(MBCR_cluster_add[2:17]), 
+                                              center = MBCR_cluster_add.min, 
+                                              scale = MBCR_cluster_add.max - MBCR_cluster_add.min))
+str(MBCR_cluster_add_scaled)
+
+NbClust(MBCR_cluster_add_scaled,distance = "euclidean", min.nc = 2,max.nc = 10, method = "ward.D2") 
+
+##Check the result in console for the value of k
+
+MBCR_cluster_add.ward.1 <- agnes(MBCR_cluster_add_scaled,method='ward')
+MBCR_cluster_add.grp.1 <-cutree(MBCR_cluster_add.ward.1, k = 2)  ##Check the value of k from Nbclust
+par(mfrow=c(1,1))
+plot(as.hclust(MBCR_cluster_add.ward.1), cex = 0.5, hang = -1,
+     main = "AGNES(Ward) Dendrogram")
+rect.hclust(as.hclust(MBCR_cluster_add.ward.1), k=2, border=2:5)
+fviz_cluster(list(data = na.exclude(MBCR_cluster_add[2:17]), cluster = MBCR_cluster_add.grp.1), pointsize = 0.75, 
+             labelsize = 8, main = "AGNES(Ward) cluster plot",
+             xlab = NULL, ylab = NULL, ggtheme = theme_classic())
+
+
+
+##check the k for the best separability
+MBCR_cluster_add.clusters <- data.frame(na.exclude(MBCR_cluster_add), cluster= as.factor(MBCR_cluster_add.grp.1)) ##depends on which group the grp.1
+str(MBCR_cluster_add.clusters)
+MBCR_cluster_add.summary.percluster <-aggregate(MBCR_cluster_add.clusters, by=list(MBCR_cluster_add.grp.1), FUN=summary)
+write.csv(MBCR_cluster_add.summary.percluster, "MBCR_cluster_add.summarypercluster.csv")
+write.csv(MBCR_cluster_add.clusters, "MBCR_cluster_add_cluster.csv")
+

@@ -1,0 +1,8 @@
+#Use the MatLab Classification learner model to generate the classification models
+
+rng(101)
+
+PRS_all = readtable (’MBCR_cluster_add.summarypercluster.csv’, ‘HeaderLines’, 0);
+indices = randperm (293);
+PRS_train = PRS_all(indices(1:205),:);
+PRS_test = PRS_all(indices(206:end),:);

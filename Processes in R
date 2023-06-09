@@ -39,3 +39,20 @@ MBCR_cluster_add.summary.percluster <-aggregate(MBCR_cluster_add.clusters, by=li
 write.csv(MBCR_cluster_add.summary.percluster, "MBCR_cluster_add.summarypercluster.csv")
 write.csv(MBCR_cluster_add.clusters, "MBCR_cluster_add_cluster.csv")
 
+###Make boxplot ####
+par(mfrow=c(2,2))
+
+boxplot(MBCR_cluster_add.clusters$DPPH_Free~MBCR_cluster_add.clusters$cluster,
+        xlab = "cluster" , ylab = "DPPH_Free",
+        col = c("tomato", "cyan2"), main = "DPPH_Free")
+        
+        
+##PCA to check separability
+install.packages("factoextra")
+library(factoextra)
+MBCR_cluster_add.pca <- prcomp(na.exclude(MBCR_cluster_add_scaled), scale = TRUE)
+groups.MBCR_cluster_add <- as.factor(MBCR_cluster_add.clusters$cluster)
+fviz_pca_biplot(MBCR_cluster_add.pca,
+                col.ind = groups.MBCR_cluster_add,
+                addEllipses = TRUE,
+                legend.title = "Cluster")

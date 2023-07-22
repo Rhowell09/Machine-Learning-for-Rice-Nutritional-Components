@@ -10,4 +10,4 @@ Through this comprehensive research, we envision significant advancements in cre
 
 
 ## Input files
-[BCR_models_only.csv] (https://github.com/Rhowell09/Machine-Learning-for-Rice-Nutritional-Components/blob/main/BCR_models_only.csv)
+[BCR_models_only.csv](https://github.com/Rhowell09/Machine-Learning-for-Rice-Nutritional-Components/blob/main/BCR_models_only.csv)

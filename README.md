@@ -10,4 +10,8 @@ Through this comprehensive research, we envision significant advancements in cre
 
 
 ## Input files
-[BCR_models_only.csv](https://github.com/Rhowell09/Machine-Learning-for-Rice-Nutritional-Components/blob/main/BCR_models_only.csv)
+- [BCR_models_only.csv](https://github.com/Rhowell09/Machine-Learning-for-Rice-Nutritional-Components/blob/main/BCR_models_only.csv) - Germinated rice and their nutritional phenotypes
+
+## Output files
+- [Summary_statistics.csv] [https://github.com/Rhowell09/Machine-Learning-for-Rice-Nutritional-Components/blob/main/MBCR_cluster_add.summarypercluster.csv] - Statistics summary from the clustering
+- [Pigmented Rice Sprouts Clusters] [https://github.com/Rhowell09/Machine-Learning-for-Rice-Nutritional-Components/blob/main/MBCR_cluster_add_cluster.csv] - The clusters of rice based on nutritional phenotypes which were used in the models.
